@@ -1,10 +1,12 @@
 const display = document.querySelector('#display');
 const keys = document.querySelectorAll('[id*=key]');
 const operators = document.querySelectorAll('[id*=Operator]');
+const dots = document.querySelectorAll('[id*=decimal]');
 
 let newNumber = true;
 let operator;
 let previousNumber;
+let dot;
 
 function updateDisplay(number) {
     if (newNumber) {
@@ -65,3 +67,14 @@ const invertSignal = () =>{
 
 
 document.querySelector("#inverter").addEventListener("click", invertSignal);
+
+//Realizando a execução do botão de decimal.
+const selectDot = () => {
+    var n = display.textContent.search(/[.+]/i);    
+    if(display.textContent === "")   
+        updateDisplay("0.")   
+    else if(n == -1)
+        updateDisplay(".")   
+}
+
+dots.forEach(dot => dot.addEventListener("click",  selectDot));
